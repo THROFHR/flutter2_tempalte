@@ -78,6 +78,9 @@ dependencies:
   # toast
   fluttertoast: ^8.0.7
 
+  # 蓝牙
+  flutter_blue_plus: ^1.2.0
+
 dev_dependencies:
   change_app_package_name: ^1.1.0
   flutter_launcher_icons: ^0.9.3

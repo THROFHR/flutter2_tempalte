@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter2_template/common/services/bluetooth.dart';
 import 'package:flutter2_template/pages/login/login_model.dart';
 import 'package:flutter2_template/utils/utils.dart';
 import 'package:get/get.dart';
 
-import 'common/services/storage.dart';
+import 'common/services/services.dart';
 import 'common/store/store.dart';
 
 /// 全局配置
@@ -33,6 +34,9 @@ class Global {
     Loading();
 
     await Get.putAsync<StorageService>(() => StorageService().init());
+    await Get.putAsync<PhotoService>(() => PhotoService().init());
+    await Get.putAsync<BlueService>(() => BlueService().init());
+
 
     Get.put<ConfigStore>(ConfigStore());
     Get.put<UserStore>(UserStore());

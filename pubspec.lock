@@ -127,6 +127,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
+  convert:
+    dependency: transitive
+    description:
+      name: convert
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.2"
   cookie_jar:
     dependency: "direct main"
     description:
@@ -218,11 +225,25 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  fixnum:
+    dependency: transitive
+    description:
+      name: fixnum
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_blue_plus:
+    dependency: "direct main"
+    description:
+      name: flutter_blue_plus
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -567,6 +588,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  protobuf:
+    dependency: transitive
+    description:
+      name: protobuf
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   provider:
     dependency: transitive
     description:
