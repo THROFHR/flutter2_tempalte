@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2_template/common/values/colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import '../../common/services/services.dart';
 import '../../components/components.dart';
 import '../../pages/home/home_controller.dart';
 import '../../utils/utils.dart';
+
 import 'package:get/get.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -31,8 +35,20 @@ class HomePage extends GetView<HomeController> {
                 onPressed: () {
                   // Get.toNamed(AppRoutes.Proxy);
                   print("!kIsWeb=========");
+                  PhotoService().camera(context).then((data){
+                    print(data);
+                  });
                 },
-                child: Text("设置代理"),
+                child: Text("相机"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // PhotoService().getFiles(context).then((data){
+                  //   print(data);
+                  // });
+                  notifyInfo(content: "你好");
+                },
+                child: Text("图片"),
               ),
               Icon(IconFont.icon_liebiao, color: AppColors.primaryElement),
               Icon(IconFont.icon_liebiao1, color: AppColors.primaryElement),

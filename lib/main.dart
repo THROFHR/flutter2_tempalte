@@ -1,13 +1,13 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter2_template/global.dart';
 import 'package:flutter2_template/router/app_pages.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'common/store/store.dart';
 import 'common/values/values.dart';
 
 
@@ -39,6 +39,14 @@ class MyApp extends StatelessWidget {
         child: GetMaterialApp(
           title: 'App Name',
           // theme: AppTheme.light,
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: ConfigStore.to.languages,
+          locale: ConfigStore.to.locale,
+          fallbackLocale: Locale('zh', 'CN'),
           debugShowCheckedModeBanner: false,
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,

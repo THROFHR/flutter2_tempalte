@@ -5,14 +5,24 @@ class AppColors {
   /// 主背景
   static const Color primaryBackground = Color(0xFFF4F6FA);
 
+  /// 颜色
+  static const Color primaryColor = Color(0xFF409EFF);
+  static const Color successColor = Color(0xFF67C23A);
+  static const Color warningColor = Color(0xFFE6A23C);
+  static const Color dangerColor = Color(0xFFF56C6C);
+  static const Color infoColor = Color(0xFF909399);
+
   /// 主文本
-  static const Color primaryText = Color(0xFF2D3142);
+  static const Color primaryText = Color(0xFF303133);
 
-  /// 主文本灰色
-  static const Color primaryGreyText = Color(0xFF9B9B9B);
+  /// 常规文字
+  static const Color defaultText = Color(0xFF606266);
 
-  /// 主文本灰色
-  static const Color primaryGreyText1 = Color(0xFFE0DDF5);
+  /// 次要文字
+  static const Color descText = Color(0xFF909399);
+
+  /// 占位文字
+  static const Color ignoreText = Color(0xFFC0C4CC);
 
 
 
@@ -38,12 +48,5 @@ class AppColors {
   /// 第三种控件-文本 浅灰色2
   static const Color thirdElementText = Color.fromARGB(255, 141, 141, 142);
 
-  // *****************************************
-
-  /// tabBar 默认颜色 灰色
-  static const Color tabBarElement = Color.fromARGB(255, 208, 208, 208);
-
-  /// tabCellSeparator 单元格底部分隔条 颜色
-  static const Color tabCellSeparator = Color.fromARGB(255, 230, 230, 231);
 }
 

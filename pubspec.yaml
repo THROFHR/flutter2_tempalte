@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   # getx
   get: ^4.1.4
@@ -48,12 +50,12 @@ dependencies:
   # webview
   webview_flutter: ^2.0.8
 
+  # 权限申请
+  permission_handler: ^10.0.0
+
   # 拍照/图片 相关
-  image_picker: ^0.7.5+3
-  permission_handler: ^8.0.0+2
-  photo_view: ^0.11.1
-  image_gallery_saver: ^1.6.9
-  flutter_cache_manager: ^3.1.0
+  wechat_assets_picker: ^7.2.0
+  wechat_camera_picker: ^3.4.0
 
   # 设备信息
   device_info: ^2.0.0

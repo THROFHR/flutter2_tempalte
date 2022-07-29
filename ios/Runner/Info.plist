@@ -56,5 +56,20 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+    <string>亲，是否允许使用您的蓝牙?</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>亲，是否允许使用您的蓝牙?</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>亲，是否允许使用日历?</string>
+    <key>NSCameraUsageDescription</key>
+    <string>亲，是否允许访问您的相机用于拍照、扫描二维码？</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>亲，是否允录像声音？</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>亲，是否允许为您的相册添加图片？</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>亲，是否允许访问您的相册？以便上传您的头像，完善个人资料</string>
+
 </dict>
 </plist>
