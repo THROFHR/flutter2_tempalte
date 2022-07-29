@@ -26,9 +26,9 @@ void dialogInfo({ String? title,
   String? content, //文本内容
   Widget? contentChild, //文本组件
   Function? cancel,
-  String? cancelText,
+  String? cancelText = "取消",
   Function? confirm,
-  String? confirmText,
+  String? confirmText = "确定",
 }) {
   Get.defaultDialog(
     title: title ?? "提示",
@@ -52,20 +52,24 @@ void dialogInfo({ String? title,
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          if(cancelText != null)
           GestureDetector(
-            child: Padding(
+            child: Container(
+              alignment: Alignment.center,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              child: Text(cancelText ?? "取消", style: TextStyle(color: AppColors.descText)),
+              child: Text(cancelText, style: TextStyle(color: AppColors.descText)),
             ),
             onTap: (){
               Get.back();
               if(cancel != null) cancel();
             },
           ),
+          if(confirmText != null)
           GestureDetector(
-            child: Padding(
+            child: Container(
+              alignment: Alignment.center,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              child: Text( confirmText ?? "确定", style: TextStyle(color: AppColors.primaryElement)),
+              child: Text(confirmText, style: TextStyle(color: AppColors.primaryElement)),
             ),
             onTap: (){
               Get.back();

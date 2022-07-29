@@ -7,7 +7,6 @@ import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 class PhotoService extends GetxService {
   static PhotoService get to => Get.find();
 
-
   Future<PhotoService> init() async {
     return this;
   }

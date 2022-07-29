@@ -35,18 +35,15 @@ class HomePage extends GetView<HomeController> {
                 onPressed: () {
                   // Get.toNamed(AppRoutes.Proxy);
                   print("!kIsWeb=========");
-                  PhotoService().camera(context).then((data){
-                    print(data);
-                  });
+                  BlueService.to.startBle();
                 },
                 child: Text("相机"),
               ),
               ElevatedButton(
                 onPressed: () {
-                  // PhotoService().getFiles(context).then((data){
-                  //   print(data);
-                  // });
-                  notifyInfo(content: "你好");
+                  PhotoService.to.getFiles(context).then((data){
+                    print(data);
+                  });
                 },
                 child: Text("图片"),
               ),
