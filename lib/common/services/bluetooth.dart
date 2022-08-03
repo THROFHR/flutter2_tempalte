@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
+import "dart:typed_data";
+
+const String _ALPHABET = "0123456789abcdef";
+
 
 class BlueService {
   static BlueService get to => Get.find();
@@ -92,28 +96,46 @@ class BlueService {
     });
   }
 
-  dataCallsendBle(List<int> value) {
+  List<int> encoder(String hex) {
+    String str = hex.replaceAll(" ", "");
+    str = str.toLowerCase();
+    if(str.length % 2 != 0) {
+      str = "0" + str;
+    }
+    Uint8List result = new Uint8List(str.length ~/ 2);
+    for(int i = 0 ; i < result.length ; i++) {
+      int firstDigit = _ALPHABET.indexOf(str[i*2]);
+      int secondDigit = _ALPHABET.indexOf(str[i*2+1]);
+      if (firstDigit == -1 || secondDigit == -1) {
+        throw new FormatException("Non-hex character detected in $hex");
+      }
+      result[i] = (firstDigit << 4) + secondDigit;
+    }
+    return result;
+  }
+  String decoder(List<int> bytes) {
+    StringBuffer buffer = new StringBuffer();
+    for (int part in bytes) {
+      if (part & 0xff != part) {
+        throw new FormatException("Non-byte integer detected");
+      }
+      buffer.write('${part < 16 ? '0' : ''}${part.toRadixString(16)}');
+    }
+    return buffer.toString();
+  }
+
+  // 发送数据
+  dataCallsendBle(String data) {
+    List<int> value = encoder(data);
     mCharacteristic.write(value);
   }
 
+  // 接收数据
   dataCallbackBle() async {
     await mCharacteristic.setNotifyValue(true);
     mCharacteristic.value.listen((value) {
       // do something with new value
-      // print("我是蓝牙返回数据 - $value");
-      if (value == null) {
-        print("我是蓝牙返回数据 - 空！！");
-        return;
-      }
-      List data = [];
-      for (var i = 0; i < value.length; i++) {
-        String dataStr = value[i].toRadixString(16);
-        if (dataStr.length < 2) {
-          dataStr = "0" + dataStr;
-        }
-        String dataEndStr = "0x" + dataStr;
-        data.add(dataEndStr);
-      }
+      var data = decoder(value);
       print("我是蓝牙返回数据 - $data");
     });
   }
