@@ -1,9 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+
+
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../common/store/store.dart';
 import '../utils/utils.dart';
@@ -193,8 +199,8 @@ class Request {
   }
 
   /// 读取本地配置
-  Map<String, dynamic>? getAuthorizationHeader() {
-    var headers = <String, dynamic>{};
+  Map<String, String> getAuthorizationHeader() {
+    var headers = <String, String>{};
     if (Get.isRegistered<UserStore>() && UserStore.to.hasToken == true) {
       headers['Authorization'] = 'Bearer ${UserStore.to.token}';
     }
@@ -229,10 +235,8 @@ class Request {
       "cacheDisk": cacheDisk,
     });
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
+    Map<String, dynamic> authorization = getAuthorizationHeader();
+    requestOptions.headers!.addAll(authorization);
 
     var response = await dio.get(
       path,
@@ -252,10 +256,8 @@ class Request {
       }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
+    Map<String, dynamic> authorization = getAuthorizationHeader();
+    requestOptions.headers!.addAll(authorization);
     var response = await dio.post(
       path,
       data: data,
@@ -275,10 +277,8 @@ class Request {
       }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
+    Map<String, dynamic> authorization = getAuthorizationHeader();
+    requestOptions.headers!.addAll(authorization);
     var response = await dio.put(
       path,
       data: data,
@@ -298,10 +298,8 @@ class Request {
       }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
+    Map<String, dynamic> authorization = getAuthorizationHeader();
+    requestOptions.headers!.addAll(authorization);
     var response = await dio.patch(
       path,
       data: data,
@@ -321,10 +319,8 @@ class Request {
       }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
+    Map<String, dynamic> authorization = getAuthorizationHeader();
+    requestOptions.headers!.addAll(authorization);
     var response = await dio.delete(
       path,
       data: data,
@@ -344,10 +340,8 @@ class Request {
       }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
+    Map<String, dynamic> authorization = getAuthorizationHeader();
+    requestOptions.headers!.addAll(authorization);
     var response = await dio.post(
       path,
       data: FormData.fromMap(data),
@@ -368,10 +362,8 @@ class Request {
       }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
+    Map<String, dynamic> authorization = getAuthorizationHeader();
+    requestOptions.headers!.addAll(authorization);
     requestOptions.headers!.addAll({
       Headers.contentLengthHeader: dataLength.toString(),
     });
@@ -384,7 +376,34 @@ class Request {
     );
     return response.data;
   }
+
+  
+  Future uploadFile(List<File> files, {Map<String, String>? headers}) async{
+
+    var uri = Uri.parse("http://r.filestore.top/upload/file");
+    var req = new http.MultipartRequest("POST", uri);
+
+    Map<String, String>? authorization = getAuthorizationHeader();
+    authorization.forEach((key, value) { req.headers.addAll(authorization); });
+
+    if (headers != null) {
+      req.headers.addAll(headers);
+    }
+
+    files.forEach((file) async {
+      req.files.add(await http.MultipartFile.fromPath(file.path.toString(), file.path));
+    });
+
+    var response = await req.send();
+
+    if (response.statusCode != 200) {
+      Future.error(ErrorEntity(code: response.statusCode, message: "上传是吧"));
+      return;
+    };
+    return response;
+  }
 }
+
 
 // 异常处理
 class ErrorEntity implements Exception {

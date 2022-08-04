@@ -10,7 +10,7 @@ class UserAPI {
   static Future<UserLoginInfoEntity> login({
     UserLoginRequestEntity? params,
   }) async {
-    // var response = await HttpUtil().post(
+    // var response = await Request().post(
     //   '/user/login',
     //   data: params?.toJson(),
     // );
@@ -32,7 +32,7 @@ class UserAPI {
 
   /// Profile
   static Future<UserLoginInfoEntity> profile() async {
-    // var response = await HttpUtil().post(
+    // var response = await Request().post(
     //   '/user/profile',
     // );
     // return UserLoginInfoEntity.fromJson(response);

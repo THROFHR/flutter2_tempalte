@@ -1,7 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter2_template/common/values/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import '../../common/services/services.dart';
 import '../../components/components.dart';
 import '../../pages/home/home_controller.dart';
@@ -31,18 +31,16 @@ class HomePage extends GetView<HomeController> {
               TextButton(
                   onPressed: () => controller.changeUserName(),
                   child: Text('changeName')),
+
               ElevatedButton(
                 onPressed: () {
-                  // Get.toNamed(AppRoutes.Proxy);
-                  print("!kIsWeb=========");
-                  BlueService.to.startBle();
-                },
-                child: Text("相机"),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  PhotoService.to.getFiles(context).then((data){
-                    print(data);
+                  PhotoService.to.getFiles(context).then((data) async{
+                    if(data.length > 0){
+                      final File? originFile = await data[0].originFile; // 原图或者原视频
+                      List<File> files = [];
+                      files.add(originFile!);
+                      Request().uploadFile(files);
+                    }
                   });
                 },
                 child: Text("图片"),
