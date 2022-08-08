@@ -40,6 +40,34 @@ Widget inputTextEdit({
   );
 }
 
+/// 输入框
+Widget inputTextAreaEdit({
+  TextEditingController? controller,
+  TextInputType keyboardType = TextInputType.text,
+  String? hintText,
+  int maxLines = 8,
+  bool autofocus = false,
+}) {
+  return TextField(
+    autofocus: autofocus,
+    controller: controller,
+    keyboardType: keyboardType,
+    decoration: InputDecoration(
+      hintText: hintText,
+      contentPadding: EdgeInsets.fromLTRB(20, 10, 0, 9),
+      border: InputBorder.none,
+    ),
+    style: TextStyle(
+      color: AppColors.primaryText,
+      fontFamily: "Avenir",
+      fontWeight: FontWeight.w400,
+      fontSize: 18.sp,
+    ),
+    maxLines: maxLines,
+    autocorrect: false, // 自动纠正
+  );
+}
+
 /// email 输入框
 /// 背景白色，文字黑色，带阴影
 Widget inputEmailEdit({

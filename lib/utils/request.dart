@@ -2,16 +2,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
-
 
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../common/store/store.dart';
+import '../config.dart';
 import '../utils/utils.dart';
 import '../common/values/values.dart';
 import 'package:get/get.dart' hide FormData, Response;
@@ -80,7 +78,9 @@ class Request {
       },
       onResponse: (response, handler) {
 
-        Map result = jsonDecode(response.data);
+
+        var result = response.data;
+        // var result = jsonDecode(response.data);
         if(result["code"] != 200){
           handler.reject(DioError(requestOptions: response.requestOptions, response: response));
           return;

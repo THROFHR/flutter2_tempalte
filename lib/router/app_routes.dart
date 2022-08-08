@@ -12,4 +12,8 @@ abstract class AppRoutes {
 
   // setproxy
   static const Proxy = '/proxy';
+
+  static const PublishPage = "/publish";
+  
+  static const String fullViewPage = "/fullViewPage";
 }

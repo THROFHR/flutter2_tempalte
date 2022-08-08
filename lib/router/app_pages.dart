@@ -10,6 +10,10 @@ import 'package:flutter2_template/pages/proxy/proxy_view.dart';
 import 'package:flutter2_template/pages/welcome/welcome_binding.dart';
 import 'package:flutter2_template/pages/welcome/welcome_view.dart';
 import 'package:get/get.dart';
+import '../pages/full_view/full_view_binding.dart';
+import '../pages/full_view/full_view_view.dart';
+import '../pages/publish/publish_binding.dart';
+import '../pages/publish/publish_view.dart';
 import '../pages/splash/spalsh_view.dart';
 
 import 'middlewares/middlewares.dart';
@@ -54,6 +58,20 @@ class AppPages {
       middlewares: [
         RouteAuthMiddleware(priority: 0),
       ],
+    ),
+    GetPage(
+      name: AppRoutes.PublishPage,
+      page: () => PublishPage(),
+      binding: PublishBinding(),
+      middlewares: [
+        RouteAuthMiddleware(priority: 0),
+      ],
+    ),
+
+    GetPage(
+      name: AppRoutes.fullViewPage,
+      page: () => FullViewPage(),
+      binding: FullViewBinding(),
     ),
     proxyRoute,
   ];

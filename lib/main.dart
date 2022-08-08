@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'common/store/store.dart';
-import 'common/values/values.dart';
+import 'config.dart';
 
 
 void main() async {

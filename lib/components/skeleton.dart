@@ -161,8 +161,9 @@ class _PKCardSkeletonState extends State<PKCardSkeleton>
 
 class PKImageSkeleton extends StatefulWidget {
   final bool isCircularImage;
+  final double padding;
   PKImageSkeleton(
-      {this.isCircularImage = true});
+      {this.isCircularImage = true, this.padding = 16});
   @override
   _PKImageSkeletonState createState() => _PKImageSkeletonState();
 }
@@ -211,7 +212,7 @@ class _PKImageSkeletonState extends State<PKImageSkeleton>
           height: height,
           width: width,
           color: Colors.white,
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(widget.padding),
           child: Container(
             decoration:
             myBoxDec(animation, isCircle: widget.isCircularImage),
@@ -329,8 +330,9 @@ Widget pageSkeleton({int lines = 5}) {
 }
 
 // /// 图片-骨架屏
-Widget imageSkeleton({bool isCircularImage = false}) {
+Widget imageSkeleton({bool isCircularImage = false, double padding = 0}) {
   return PKImageSkeleton(
     isCircularImage: isCircularImage,
+    padding: padding,
   );
 }
