@@ -21,6 +21,8 @@ class UserStore extends GetxController {
   UserLoginInfoEntity get profile => _profile.value;
   bool get hasToken => token.isNotEmpty;
 
+
+
   @override
   void onInit() {
     super.onInit();
@@ -54,6 +56,17 @@ class UserStore extends GetxController {
   Future<void> saveProfile(UserLoginInfoEntity profile) async {
     _isLogin.value = true;
     StorageService.to.setString(STORAGE_USER_PROFILE_KEY, jsonEncode(profile));
+    _profile(profile);
+  }
+
+  // 保存 profile
+  Future<void> updateProfile(Map<String, dynamic> update) async {
+    var json = UserStore.to.profile.toJson();
+    json["nickname"] = "${DateTime.now()}";
+    json.addAll(update);
+    var profile = UserLoginInfoEntity.fromJson(json);
+    StorageService.to.setString(STORAGE_USER_PROFILE_KEY, jsonEncode(profile));
+    _profile(profile);
   }
 
   // 注销
